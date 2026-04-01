@@ -32,9 +32,20 @@ export function useScrollReveal<T extends HTMLElement = HTMLDivElement>(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
+          el.style.willChange = 'opacity, transform';
+          
+          const handleTransitionEnd = (e: TransitionEvent) => {
+            if (e.propertyName === 'opacity' || e.propertyName === 'transform') {
+              el.style.willChange = 'auto';
+              el.removeEventListener('transitionend', handleTransitionEnd);
+            }
+          };
+          el.addEventListener('transitionend', handleTransitionEnd);
+
           if (once) observer.unobserve(el);
         } else if (!once) {
           setIsVisible(false);
+          el.style.willChange = 'auto';
         }
       },
       { threshold, rootMargin }

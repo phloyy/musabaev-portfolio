@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useLang } from '../i18n/LanguageContext';
 import LanguageSwitcher from './LanguageSwitcher';
 import MobileMenu from './MobileMenu';
+import Logo from './Logo';
 
 interface NavProps {
   /** When true, nav starts transparent and becomes solid on scroll (for homepage hero) */
@@ -29,7 +30,6 @@ export default function Nav({ transparent = false }: NavProps) {
     { path: '/', label: t('nav.home') },
     { path: '/work', label: t('nav.work') },
     { path: '/about', label: t('nav.about') },
-    { path: '/contact', label: t('nav.contact') },
   ];
 
   const navClass = [
@@ -41,7 +41,7 @@ export default function Nav({ transparent = false }: NavProps) {
   return (
     <nav className={navClass}>
       <Link to="/" className="nav-logo" data-cursor-hover="true">
-        G.UX
+        <Logo />
       </Link>
       <div className="nav-links">
         {navLinks.map((link) => (
@@ -55,9 +55,9 @@ export default function Nav({ transparent = false }: NavProps) {
           </Link>
         ))}
         <LanguageSwitcher />
-        <Link to="/contact" className="nav-cta" data-cursor-hover="true">
+        <a href="/#contact" className="nav-cta" data-cursor-hover="true">
           {t('nav.cta')}
-        </Link>
+        </a>
       </div>
       <MobileMenu mode="inner" />
     </nav>

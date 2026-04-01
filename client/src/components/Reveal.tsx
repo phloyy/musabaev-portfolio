@@ -20,26 +20,25 @@ export default function Reveal({
   children,
   direction = 'up',
   delay = 0,
-  duration = 0.6,
+  duration = 1.2,
   className = '',
   threshold = 0.15,
 }: RevealProps) {
   const { ref, isVisible } = useScrollReveal<HTMLDivElement>({ threshold });
 
   const transforms: Record<Direction, string> = {
-    up: 'translateY(40px)',
-    down: 'translateY(-40px)',
-    left: 'translateX(-40px)',
-    right: 'translateX(40px)',
-    scale: 'scale(0.95)',
+    up: 'translateY(60px)',
+    down: 'translateY(-60px)',
+    left: 'translateX(-60px)',
+    right: 'translateX(60px)',
+    scale: 'scale(0.9)',
     none: 'none',
   };
 
   const style: CSSProperties = {
     opacity: isVisible ? 1 : 0,
     transform: isVisible ? 'none' : transforms[direction],
-    transition: `opacity ${duration}s ease ${delay}s, transform ${duration}s ease ${delay}s`,
-    willChange: 'opacity, transform',
+    transition: `opacity ${duration}s cubic-bezier(0.16, 1, 0.3, 1) ${delay}s, transform ${duration}s cubic-bezier(0.16, 1, 0.3, 1) ${delay}s`,
   };
 
   return (

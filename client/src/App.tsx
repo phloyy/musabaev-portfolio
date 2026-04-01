@@ -11,6 +11,7 @@ const WorkIndex = React.lazy(() => import('./pages/WorkIndex'));
 const CaseStudy = React.lazy(() => import('./pages/CaseStudy'));
 const About = React.lazy(() => import('./pages/About'));
 const Contact = React.lazy(() => import('./pages/Contact'));
+const Admin = React.lazy(() => import('./pages/Admin'));
 const NotFound = React.lazy(() => import('./pages/NotFound'));
 
 /** Scroll to top on route change */
@@ -36,7 +37,7 @@ function PageTransition({ children }: { children: ReactNode }) {
     const timer = setTimeout(() => {
       setDisplayChildren(children);
       setTransitionStage('in');
-    }, 150);
+    }, 300);
     return () => clearTimeout(timer);
   }, [location.pathname]);
 
@@ -49,7 +50,7 @@ function PageTransition({ children }: { children: ReactNode }) {
     <div
       className="page-transition"
       style={{
-        animation: `${transitionStage === 'in' ? 'fadeIn' : 'fadeOut'} 0.2s ease-in-out`,
+        animation: `${transitionStage === 'in' ? 'fadeIn' : 'fadeOut'} 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards`,
       }}
     >
       {displayChildren}
@@ -76,6 +77,7 @@ function AppRoutes() {
           <Route path="/work/:slug" element={<CaseStudy />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/admin" element={<Admin />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>

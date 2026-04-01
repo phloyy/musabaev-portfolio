@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 100" fill="currentColor">
+  <!-- Symbol -->
+  <g transform="translate(10, 10)">
+    <path d="M40 0 v80" stroke="currentColor" stroke-width="8" />
+    <path d="M0 15 l40 20 l40 -20 m-80 50 l40 -20 l40 20" stroke="currentColor" stroke-width="8" fill="none" />
+    <path d="M0 15 v10 l40 20 l40 -20 v-10 l-40 20 z" />
+    <path d="M0 65 v10 l40 -20 l40 20 v-10 l-40 -20 z" />
+  </g>
+  <!-- Text -->
+  <text x="110" y="45" font-family="sans-serif" font-size="34" font-weight="bold" letter-spacing="1">BEK</text>
+  <text x="110" y="85" font-family="sans-serif" font-size="34" font-weight="bold" letter-spacing="1">MUSABAEV</text>
+</svg>

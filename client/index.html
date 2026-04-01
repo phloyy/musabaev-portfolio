@@ -6,11 +6,50 @@
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1" />
-    <title>Portfolio / G—UX</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>Portfolio / BEK MUSABAEV</title>
+    <meta name="description" content="Бекзод Мусабаев — графический и UX/UI дизайнер из Узбекистана. Брендинг, веб-дизайн, 3D, моушн-дизайн. Портфолио и контакты.">
+    <!-- Open Graph tags -->
+    <meta property="og:title" content="Portfolio / BEK MUSABAEV">
+    <meta property="og:description" content="Бекзод Мусабаев — графический и UX/UI дизайнер из Узбекистана. Брендинг, веб-дизайн, 3D, моушн-дизайн. Портфолио и контакты.">
+    <meta property="og:image" content="/og-image.jpg">
+    <meta property="og:url" content="https://bekmusabaev.com"> <!-- TODO: Replace with actual domain if different -->
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <style>
+      html.lenis, html.lenis body { height: auto; }
+      .lenis.lenis-smooth { scroll-behavior: auto !important; }
+      .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+      .lenis.lenis-stopped { overflow: hidden; }
+      .lenis.lenis-smooth iframe { pointer-events: none; }
+    </style>
   </head>
 
   <body>
     <div id="root"></div>
+    <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
+    <script>
+      const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smooth: true,
+      });
+      window.lenis = lenis;
+
+      document.body.addEventListener('click', (e) => {
+        const link = e.target.closest('a');
+        if (link && link.hash && link.getAttribute('href').startsWith('#')) {
+          e.preventDefault();
+          lenis.scrollTo(link.hash);
+        }
+      });
+
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 

@@ -40,7 +40,6 @@ export default function MobileMenu({ mode }: MobileMenuProps) {
     { path: '/', label: t('nav.home') },
     { path: '/work', label: t('nav.work') },
     { path: '/about', label: t('nav.about') },
-    { path: '/contact', label: t('nav.contact') },
   ];
 
   const handleAnchorClick = () => setOpen(false);
@@ -100,9 +99,9 @@ export default function MobileMenu({ mode }: MobileMenuProps) {
                 {t('nav.cta')}
               </a>
             ) : (
-              <Link to="/contact" className="nav-cta mobile-cta" data-cursor-hover="true">
+              <a href="/#contact" className="nav-cta mobile-cta" data-cursor-hover="true" onClick={handleAnchorClick}>
                 {t('nav.cta')}
-              </Link>
+              </a>
             )}
           </div>
         </nav>

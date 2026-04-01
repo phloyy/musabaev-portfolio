@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Logo from './Logo';
 
 /**
  * Full-screen loading screen with G.UX logo animation.
@@ -27,9 +28,7 @@ export default function Loader() {
   return (
     <div className={`loader${hiding ? ' loader--hiding' : ''}`}>
       <div className="loader-logo">
-        <span className="loader-g">G</span>
-        <span className="loader-dot">.</span>
-        <span className="loader-ux">UX</span>
+        <Logo />
       </div>
       <div className="loader-line" />
     </div>

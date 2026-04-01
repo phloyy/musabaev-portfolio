@@ -4,6 +4,7 @@
 
 :root {
   --clr-light: #F4F4F2;
+  --clr-muted: rgba(244, 244, 242, 0.45);
   --clr-dark: #101010;
   --clr-accent: #EB4123;
   --font-display: -apple-system, 'SF Pro Display', 'Inter', 'Helvetica Neue', sans-serif;
@@ -62,7 +63,7 @@ html {
   z-index: 9999;
   transform: translate(-50%, -50%);
   mix-blend-mode: difference;
-  transition: width 0.2s, height 0.2s, background 0.2s;
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1), height 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease;
 }
 
 .cursor.hovering {
@@ -315,7 +316,7 @@ html {
   padding-left: 1.5rem;
 }
 
-.project-row > * {
+.project-row>* {
   position: relative;
   z-index: 2;
 }
@@ -1221,11 +1222,13 @@ html {
 
 /* Landing Header — now uses unified .site-nav, these are kept for backwards compat */
 .landing-header {
-  display: none; /* replaced by unified Nav */
+  display: none;
+  /* replaced by unified Nav */
 }
 
 .landing-nav-links {
-  display: none; /* replaced by unified Nav */
+  display: none;
+  /* replaced by unified Nav */
 }
 
 .nav-cta {
@@ -1285,12 +1288,10 @@ html {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(16, 16, 16, 0.4) 0%,
-    rgba(16, 16, 16, 0.6) 50%,
-    rgba(16, 16, 16, 0.85) 100%
-  );
+  background: linear-gradient(to bottom,
+      rgba(16, 16, 16, 0.4) 0%,
+      rgba(16, 16, 16, 0.6) 50%,
+      rgba(16, 16, 16, 0.85) 100%);
 }
 
 .hero-inner {
@@ -2115,20 +2116,41 @@ html {
    ========================================================================== */
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 @keyframes fadeOut {
-  from { opacity: 1; }
-  to { opacity: 0; }
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.98);
+  }
 }
 
 /* ==========================================================================
    Responsive
    ========================================================================== */
 
+@media (hover: none) {
+  .cursor {
+    display: none !important;
+  }
+}
+
 @media (max-width: 1024px) {
+
   /* Homepage */
   .viewport-wrapper {
     flex-direction: column;
@@ -2300,6 +2322,7 @@ html {
 }
 
 @media (max-width: 640px) {
+
   /* Work Index */
   .grid-view {
     grid-template-columns: 1fr;
@@ -2429,7 +2452,8 @@ html {
    Touch Device — Hide Custom Cursor
    ========================================================================== */
 
-@media (hover: none), (pointer: coarse) {
+@media (hover: none),
+(pointer: coarse) {
   .cursor {
     display: none !important;
   }
@@ -2474,6 +2498,7 @@ html {
   border: none;
   transition: top 0.2s ease;
 }
+
 .skip-to-content:focus {
   top: 16px;
 }
@@ -2694,7 +2719,7 @@ html {
   position: relative;
   overflow: hidden;
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.3s ease;
+    box-shadow 0.3s ease;
 }
 
 .nlf-submit::before {
@@ -2738,9 +2763,17 @@ html {
 }
 
 @keyframes nlf-pulse {
-  0%   { transform: scale(1); }
-  50%  { transform: scale(0.96); }
-  100% { transform: scale(1); }
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(0.96);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }
 
 /* ── Toast notification ── */
@@ -2933,6 +2966,7 @@ a.nlf-info-value:hover {
 
 /* ── Touch devices: restore normal cursor ── */
 @media (hover: none) and (pointer: coarse) {
+
   .nlf-inline-input,
   .nlf-inline-select,
   .nlf-submit,

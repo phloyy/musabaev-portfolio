@@ -5,6 +5,9 @@ export default function Cursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
 
+  const isTouch = window.matchMedia('(hover: none)').matches;
+  if (isTouch) return null;
+
   // Reset cursor state on every route change
   useEffect(() => {
     if (cursorRef.current) {

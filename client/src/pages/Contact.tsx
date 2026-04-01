@@ -46,22 +46,22 @@ export default function Contact() {
       <footer className="nlf-info-grid">
         <div className="nlf-info-card">
           <div className="nlf-info-label">{t('contact.emailLabel')}</div>
-          <a href="mailto:studio@scruz.design" className="nlf-info-value" data-cursor-hover="true">
-            studio@scruz.design
+          <a href="mailto:bekzodmusabaev@outlook.com" className="nlf-info-value" data-cursor-hover="true">
+            bekzodmusabaev@outlook.com
           </a>
         </div>
 
         <div className="nlf-info-card">
           <div className="nlf-info-label">{t('contact.location')}</div>
-          <div className="nlf-info-value">New York, USA</div>
+          <div className="nlf-info-value">Ташкент / Самарканд, Узбекистан</div>
         </div>
 
         <div className="nlf-info-card">
           <div className="nlf-info-label">{t('contact.social')}</div>
           <div className="nlf-info-socials">
-            <a href="#" className="nlf-social-link" data-cursor-hover="true">Read.cv</a>
-            <a href="#" className="nlf-social-link" data-cursor-hover="true">Instagram</a>
-            <a href="#" className="nlf-social-link" data-cursor-hover="true">LinkedIn</a>
+            <a href="https://read.cv/bekmusabaev" rel="noopener noreferrer" target="_blank" className="nlf-social-link" data-cursor-hover="true">Read.cv</a>
+            <a href="https://instagram.com/bekmusabaev" rel="noopener noreferrer" target="_blank" className="nlf-social-link" data-cursor-hover="true">Instagram</a>
+            <a href="#" className="nlf-social-link" data-cursor-hover="true">LinkedIn {/* TODO: Add LinkedIn URL */}</a>
           </div>
         </div>
 

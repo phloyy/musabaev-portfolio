@@ -1,19 +1,27 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { projectsData } from '../data/projects';
 import { useLang } from '../i18n/LanguageContext';
+import { useProjects } from '../hooks/useProjects';
 import Reveal from '../components/Reveal';
 import NaturalLanguageForm from '../components/NaturalLanguageForm';
+import Logo from '../components/Logo';
 
 const skillsData = [
-  { categoryKey: 'skills.design', items: ['UI/UX Design', 'Brand Identity', 'Editorial Design', 'Design Systems', 'Information Architecture'] },
-  { categoryKey: 'skills.tools', items: ['Figma', 'Adobe Creative Suite', 'Webflow', 'Framer', 'After Effects'] },
-  { categoryKey: 'skills.development', items: ['HTML / CSS', 'JavaScript', 'React', 'Responsive Design', 'Web Performance'] },
+  { categoryKey: 'skills.design', items: ['Figma', 'Adobe Illustrator', 'Photoshop', 'InDesign', 'CorelDRAW'] },
+  { categoryKey: 'skills.motion', items: ['After Effects', 'Blender', 'Premiere Pro'] },
+  { categoryKey: 'skills.ai', items: ['KREA AI', 'Recraft', 'Midjourney'] },
+  { categoryKey: 'skills.development', items: ['HTML/CSS', 'React', 'Webflow', 'Framer'] },
 ];
 
 export default function Homepage() {
   const { t } = useLang();
+  const { projects, loading } = useProjects();
+  const [heroReady, setHeroReady] = useState(false);
 
-
+  useEffect(() => {
+    const timer = setTimeout(() => setHeroReady(true), 300);
+    return () => clearTimeout(timer);
+  }, []);
 
   const servicesKeys = [
     { id: '01', titleKey: 'service.1.title', descKey: 'service.1.desc' },
@@ -65,10 +73,22 @@ export default function Homepage() {
         </div>
         <div className="landing-section-inner hero-inner">
           <div className="hero-content">
-            <Reveal direction="up" delay={0.1}><div className="hero-label">{t('hero.label')}</div></Reveal>
-            <Reveal direction="up" delay={0.2}><h1 className="hero-name">{t('hero.name')}</h1></Reveal>
+            <div className="hero-label" style={{ opacity: heroReady ? 1 : 0, transition: 'opacity 0.8s ease 0.6s' }}>{t('hero.label')}</div>
+            <h1 className="hero-name">
+              {t('hero.name').split(' ').map((word, idx) => (
+                <div key={idx} style={{ display: 'inline-block', overflow: 'hidden', paddingRight: '0.2em' }}>
+                  <span style={{ 
+                    display: 'inline-block', 
+                    transform: heroReady ? 'translateY(0)' : 'translateY(110%)',
+                    transition: `transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${idx * 0.1}s`
+                  }}>
+                    {word}
+                  </span>
+                </div>
+              ))}
+            </h1>
             <Reveal direction="up" delay={0.35}><p className="hero-bio">{t('hero.bio')}</p></Reveal>
-            <Reveal direction="up" delay={0.5}><a href="#contact" className="hero-cta" data-cursor-hover="true">{t('nav.cta')}</a></Reveal>
+            <Reveal direction="up" delay={0.5}><a href="/#contact" className="hero-cta" data-cursor-hover="true">{t('nav.cta')}</a></Reveal>
           </div>
           <Reveal direction="right" delay={0.4}>
             <div className="hero-meta">
@@ -91,25 +111,38 @@ export default function Homepage() {
           <Reveal><div className="section-label">{t('works.label')}</div></Reveal>
           <Reveal delay={0.1}><div className="section-title">{t('works.title')}</div></Reveal>
           <div className="project-list">
-            {projectsData.map((project) => (
+            {loading ? (
+              [1, 2, 3].map(i => (
+                <div key={i} className="project-row" style={{ opacity: 0.5, pointerEvents: 'none' }}>
+                  <span className="p-idx">0{i}</span>
+                  <span className="p-title" style={{ background: 'rgba(255,255,255,0.1)', color: 'transparent', borderRadius: '4px' }}>Loading project title</span>
+                  <span className="p-type" style={{ background: 'rgba(255,255,255,0.1)', color: 'transparent', borderRadius: '4px' }}>Type</span>
+                  <span className="p-year">----</span>
+                </div>
+              ))
+            ) : projects.map((project, idx) => {
+              const num = project.id || String(idx + 1).padStart(2, '0');
+              const type = project.type || project.description || project.category;
+              const imgUrl = project.image_url || project.img;
+              return (
               <Link
-                key={project.id}
+                key={project.id || project.slug}
                 to={`/work/${project.slug}`}
                 className="project-row"
                 data-cursor-hover="true"
               >
-                <span className="p-idx">{project.id}</span>
+                <span className="p-idx">{num}</span>
                 <span className="p-title">{project.title}</span>
-                <span className="p-type">{project.type}</span>
+                <span className="p-type">{type}</span>
                 <span className="p-year">{project.year}</span>
                 <img
-                  src={project.img}
+                  src={imgUrl}
                   alt={project.title}
                   className="hover-reveal"
                   loading="lazy"
                 />
               </Link>
-            ))}
+            )})}
           </div>
           <div className="works-cta-row">
             <Link to="/work" className="works-view-all" data-cursor-hover="true">
@@ -129,7 +162,7 @@ export default function Homepage() {
               <Reveal key={service.id} direction="up" delay={0.1 * i}>
                 <div className="service-item">
                   <span className="service-idx">{service.id}</span>
-                  <h3 className="service-title">{t(service.titleKey)}</h3>
+                  <h2 className="service-title">{t(service.titleKey)}</h2>
                   <p className="service-desc">{t(service.descKey)}</p>
                 </div>
               </Reveal>
@@ -148,7 +181,7 @@ export default function Homepage() {
               <Reveal key={step.id} direction="up" delay={0.1 * i}>
                 <div className="process-step">
                   <span className="process-step-idx">{step.id}</span>
-                  <h3 className="process-step-title">{t(step.titleKey)}</h3>
+                  <h2 className="process-step-title">{t(step.titleKey)}</h2>
                   <p className="process-step-desc">{t(step.descKey)}</p>
                   {i < processKeys.length - 1 && (
                     <span className="process-arrow" aria-hidden="true">&rarr;</span>
@@ -175,11 +208,13 @@ export default function Homepage() {
                 <div className="pricing-range">{t(tier.rangeKey)}</div>
                 <p className="pricing-desc">{t(tier.descKey)}</p>
                 <ul className="pricing-includes">
-                  {tier.includesKeys.map((key) => (
-                    <li className="pricing-item" key={key}>{t(key)}</li>
-                  ))}
+                  {tier.includesKeys.map((key) => {
+                    const text = t(key);
+                    if (!text || text.trim() === '') return null;
+                    return <li className="pricing-item" key={key}>{text}</li>;
+                  })}
                 </ul>
-                <a href="#contact" className="pricing-cta" data-cursor-hover="true">{t('pricing.cta')}</a>
+                <a href="/#contact" className="pricing-cta" data-cursor-hover="true">{t('pricing.cta')}</a>
               </div>
               </Reveal>
             ))}
@@ -231,7 +266,9 @@ export default function Homepage() {
       <footer className="landing-footer">
         <div className="landing-section-inner landing-footer-inner">
           <div className="footer-left">
-            <Link to="/" className="footer-logo" data-cursor-hover="true">G.UX</Link>
+            <Link to="/" className="footer-logo" data-cursor-hover="true">
+              <Logo />
+            </Link>
             <span className="footer-copy">{t('footer.copy')}</span>
           </div>
           <nav className="footer-links">
@@ -240,8 +277,8 @@ export default function Homepage() {
             <Link to="/contact" data-cursor-hover="true">{t('nav.contact')}</Link>
           </nav>
           <div className="footer-social">
-            <a href="#" data-cursor-hover="true">Read.cv</a>
-            <a href="#" data-cursor-hover="true">Instagram</a>
+            <a href="https://read.cv/bekmusabaev" rel="noopener noreferrer" target="_blank" data-cursor-hover="true">Read.cv</a>
+            <a href="https://instagram.com/bekmusabaev" rel="noopener noreferrer" target="_blank" data-cursor-hover="true">Instagram</a>
           </div>
         </div>
       </footer>

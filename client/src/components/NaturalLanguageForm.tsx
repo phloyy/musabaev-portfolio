@@ -6,6 +6,7 @@ import {
   type FormEvent,
 } from 'react';
 import { useLang } from '../i18n/LanguageContext';
+import { sendContactForm } from '../lib/emailService';
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
@@ -151,22 +152,40 @@ export default function NaturalLanguageForm() {
     timeline: '',
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const update = (field: keyof NLFState) => (value: string) =>
+  const update = (field: keyof NLFState) => (value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }));
+    setError(null);
+  };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('NLF Payload:', form);
+    if (!form.name.trim() || !form.contact.trim()) {
+      setError(t('cta.errorRequired') || 'Имя и контакт обязательны / Name and contact are required');
+      return;
+    }
+    setError(null);
+    setIsSubmitting(true);
     setIsAnimating(true);
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
+
+    try {
+      await sendContactForm(form);
+      setSubmitted(true);
+      setTimeout(() => {
+        setSubmitted(false);
+        setIsAnimating(false);
+        setForm({ name: '', service: '', description: '', contact: '', timeline: '' });
+      }, 4000);
+    } catch (err) {
+      setError('Ошибка отправки. Попробуйте еще раз. / Error sending. Please try again.');
       setIsAnimating(false);
-      setForm({ name: '', service: '', description: '', contact: '', timeline: '' });
-    }, 4000);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -220,13 +239,17 @@ export default function NaturalLanguageForm() {
       </p>
 
       {/* ---- Submit ---- */}
+      {error && <div className="nlf-error" style={{ color: 'var(--clr-accent)', marginBottom: '1rem', fontSize: '14px', fontFamily: 'var(--font-mono)' }}>{error}</div>}
       <button
         type="submit"
-        className={`nlf-submit ${isAnimating ? 'nlf-submit--sent' : ''}`}
+        className={`nlf-submit ${isSubmitting || submitted ? 'nlf-submit--sent' : ''}`}
         data-cursor-hover="true"
+        disabled={isSubmitting || submitted}
       >
-        <span className="nlf-submit-text">{t('nlf.submit')}</span>
-        <span className="nlf-submit-arrow">→</span>
+        <span className="nlf-submit-text">
+          {submitted ? t('cta.success') || 'Сообщение отправлено! / Message sent!' : isSubmitting ? 'Отправка... / Sending...' : t('nlf.submit')}
+        </span>
+        {!submitted && !isSubmitting && <span className="nlf-submit-arrow">→</span>}
       </button>
     </form>
   );

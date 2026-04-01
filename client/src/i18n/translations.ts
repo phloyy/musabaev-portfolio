@@ -12,12 +12,12 @@ export const translations: Record<Lang, Record<string, string>> = {
 
     // Hero
     'hero.label': 'Графический & UX/UI Дизайнер',
-    'hero.name': 'София Круз.',
-    'hero.bio': 'Превращаю сложные задачи в чёткие визуальные системы. Брутализм без компромиссов — структура, функция, эстетика. Каждый пиксель работает.',
+    'hero.name': 'Бекзод Мусабаев.',
+    'hero.bio': 'Превращаю идеи в чёткие визуальные системы. Брендинг, веб-дизайн, 3D и моушн — от первого брифа до финального файла. 4 года опыта. Работал с ритейлом, стартапами и агентствами.',
     'hero.status': 'Статус',
-    'hero.statusValue': "Доступна '25",
+    'hero.statusValue': "Доступен '25",
     'hero.based': 'Локация',
-    'hero.basedValue': 'Нью-Йорк, США',
+    'hero.basedValue': 'Ташкент / Самарканд, Узбекистан',
 
     // Works
     'works.label': 'Избранные работы',
@@ -28,11 +28,11 @@ export const translations: Record<Lang, Record<string, string>> = {
     'services.label': 'Что я делаю',
     'services.title': 'Услуги',
     'service.1.title': 'Бренд-айдентика',
-    'service.1.desc': 'Логотип, типографика, цветовая система и гайдлайны — полная визуальная ДНК вашего бренда. Не декорация, а рабочий инструмент.',
-    'service.2.title': 'Веб-дизайн',
-    'service.2.desc': 'Сайты, которые конвертируют. Системный UI, продуманная архитектура, адаптив под любой экран.',
-    'service.3.title': '3D и Моушн',
-    'service.3.desc': 'Анимация и 3D, которые усиливают продукт. Не украшательство — функциональное движение с целью.',
+    'service.1.desc': 'Логотип, типографика, цветовая система, гайдлайны. Полная визуальная ДНК бренда — не декорация, а рабочий инструмент.',
+    'service.2.title': 'Веб-дизайн & UI/UX',
+    'service.2.desc': 'Сайты и интерфейсы, которые конвертируют. Системный UI, продуманная архитектура, адаптив.',
+    'service.3.title': 'SMM-дизайн & Key Visual',
+    'service.3.desc': 'Визуальный контент для социальных сетей, ключевые визуалы для рекламных кампаний и ивентов.',
     'service.4.title': 'Арт-дирекшн',
     'service.4.desc': 'Визуальная стратегия для кампаний и продуктов. Единый язык от концепции до каждого пикселя.',
 
@@ -54,21 +54,21 @@ export const translations: Record<Lang, Record<string, string>> = {
     'pricing.label': 'Стоимость',
     'pricing.title': 'Пакеты',
     'pricing.starter': 'Стартовый',
-    'pricing.starter.range': 'от 50 000 ₽',
+    'pricing.starter.range': 'от $200',
     'pricing.starter.desc': 'Для небольших проектов и стартапов.',
     'pricing.pro': 'Про',
-    'pricing.pro.range': 'от 150 000 ₽',
-    'pricing.pro.desc': 'Для растущего бизнеса и сложных продуктов.',
+    'pricing.pro.range': 'от $600',
+    'pricing.pro.desc': 'Для бизнеса и продуктов.',
     'pricing.enterprise': 'Корпоративный',
     'pricing.enterprise.range': 'Индивидуально',
-    'pricing.enterprise.desc': 'Для масштабных проектов с постоянной поддержкой.',
+    'pricing.enterprise.desc': 'Дизайн-система, продуктовый дизайн, арт-дирекшн, выделенная поддержка.',
     'pricing.cta': 'Обсудить',
-    'pricing.includes.brandIdentity': 'Бренд-айдентика',
-    'pricing.includes.landingPage': 'Лендинг',
-    'pricing.includes.2revisions': '2 раунда правок',
+    'pricing.includes.brandIdentity': 'Лого или лендинг',
+    'pricing.includes.landingPage': '2 раунда правок',
+    'pricing.includes.2revisions': ' ',
     'pricing.includes.fullBranding': 'Полный брендинг',
     'pricing.includes.multiPage': 'Многостраничный сайт',
-    'pricing.includes.motionDesign': 'Моушн-дизайн',
+    'pricing.includes.motionDesign': 'SMM-кит',
     'pricing.includes.4revisions': '4 раунда правок',
     'pricing.includes.designSystem': 'Дизайн-система',
     'pricing.includes.productDesign': 'Продуктовый дизайн',
@@ -78,14 +78,16 @@ export const translations: Record<Lang, Record<string, string>> = {
     // About (landing)
     'about.label': 'Обо мне',
     'about.title': 'Экспертиза & Инструменты',
-    'about.text1': 'Дизайн — это система ограничений. Технических, бизнесовых, пользовательских. Я не борюсь с ними — я строю внутри них. Сетки, типографика, пространство — мои рабочие инструменты.',
-    'about.text2': 'Результат: интерфейсы, где каждый элемент обоснован и каждое решение работает на цель.',
+    'about.text1': 'Начинал с курсов в Wepro — освоил Photoshop и Illustrator за 4 месяца. Потом Brandex Group: логотипы для стартапов, 4 проекта за 5 месяцев. SMM-агентство: визуальный контент для 15 аккаунтов одновременно.',
+    'about.text2': 'Family Park: редизайн сайта + соцсети — рост охвата на 130% за год. Ключевые визуалы для городских рекламных кампаний и концертов. Сейчас — фриланс и коллаборации с веб-студией Wemake.',
     'about.readMore': 'Подробнее →',
 
     // Skills
     'skills.design': 'Дизайн',
     'skills.tools': 'Инструменты',
     'skills.development': 'Разработка',
+    'skills.motion': 'Моушн & 3D',
+    'skills.ai': 'AI',
 
     // CTA
     'cta.heading': 'Есть задача?\nРешим.',
@@ -96,10 +98,10 @@ export const translations: Record<Lang, Record<string, string>> = {
     'cta.projectPlaceholder': 'Бренд-айдентика, Веб-дизайн и т.д.',
     'cta.message': 'Сообщение',
     'cta.send': 'Отправить заявку',
-    'cta.success': 'Получила. Свяжусь в течение 24 часов.',
+    'cta.success': 'Получил. Свяжусь в течение 24 часов.',
 
     // Footer
-    'footer.copy': '© MMXXV София Круз',
+    'footer.copy': '© MMXXV Бекзод Мусабаев',
 
     // Inner pages
     'page.about': 'Обо мне',
@@ -130,8 +132,8 @@ export const translations: Record<Lang, Record<string, string>> = {
     'contact.subtitle': 'Заполните пропуски ниже — это займёт всего минуту.',
 
     // NLF (Natural Language Form)
-    'nlf.greeting': 'Привет, Бекзод, я',
-    'nlf.needPartner': '. Мне нужен надёжный дизайн-партнёр, который поможет с',
+    'nlf.greeting': 'Привет, Бекзод! Я',
+    'nlf.needPartner': '. Мне нужен дизайнер для',
     'nlf.projectAbout': '. Проект про',
     'nlf.reachMe': '. Связаться со мной можно по',
     'nlf.startTime': '. Хотелось бы начать',
@@ -153,7 +155,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     'nlf.timeline.norush': 'Не спешу',
 
     // About page
-    'about.intro': 'Я графический и UX/UI дизайнер из Нью-Йорка, специализируюсь на системном дизайне, редакторских макетах и цифровых продуктах. Моя работа сосредоточена на создании интерфейсов, балансирующих информационную плотность и ясность.',
+    'about.intro': 'Начинал с курсов в Wepro — освоил Photoshop и Illustrator за 4 месяца. Потом Brandex Group: логотипы для стартапов, 4 проекта за 5 месяцев. SMM-агентство: визуальный контент для 15 аккаунтов одновременно. Family Park: редизайн сайта + соцсети — рост охвата на 130% за год. Ключевые визуалы для городских рекламных кампаний и концертов. Сейчас — фриланс и коллаборации с веб-студией Wemake.',
     'about.bg.label': 'Предыстория',
     'about.bg.title': 'Философия дизайна',
     'about.bg.text1': 'Мой подход к дизайну основан на системном мышлении и редакторских принципах. Я верю, что великий дизайн рождается из понимания ограничений — будь то технические, бизнесовые или пользовательские. Я работаю методично, используя сетки, типографику и пространственные связи как основные инструменты для создания визуальной иерархии и ясности.',
@@ -177,8 +179,8 @@ export const translations: Record<Lang, Record<string, string>> = {
 
     // Hero
     'hero.label': 'Grafik & UX/UI Dizayner',
-    'hero.name': 'Sofiya Kruz.',
-    'hero.bio': "Murakkab masalalarni aniq vizual tizimlarga aylantiraman. Murosasiz brutalizm — tuzilma, funksiya, estetika. Har bir piksel ishlaydi.",
+    'hero.name': 'Bekzod Musabaev.',
+    'hero.bio': "G'oyalarni aniq vizual tizimlarga aylantiraman. Brending, veb-dizayn, 3D va motion — birinchi brifdan yakuniy faylgacha. 4 yillik tajriba. Chakana savdo, startaplar va agentliklar bilan ishlaganman.",
     'hero.status': 'Holat',
     'hero.statusValue': "Mavjud '25",
     'hero.based': 'Joylashuv',
@@ -264,7 +266,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     'cta.success': "Qabul qildim. 24 soat ichida bog'lanaman.",
 
     // Footer
-    'footer.copy': '© MMXXV Sofiya Kruz',
+    'footer.copy': '© MMXXV Bekzod Musabaev',
 
     // Inner pages
     'page.about': 'Men haqimda',
@@ -295,7 +297,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     'contact.subtitle': "Quyidagi bo'sh joylarni to'ldiring — bu atigi bir daqiqa oladi.",
 
     // NLF (Natural Language Form)
-    'nlf.greeting': 'Salom Bekzod, men',
+    'nlf.greeting': 'Salom Bekzod! Men',
     'nlf.needPartner': '. Menga yordam beradigan ishonchli dizayn hamkor kerak',
     'nlf.projectAbout': '. Loyiha',
     'nlf.reachMe': " haqida. Men bilan bog'lanish mumkin",
@@ -342,8 +344,8 @@ export const translations: Record<Lang, Record<string, string>> = {
 
     // Hero
     'hero.label': 'Graphic & UX/UI Designer',
-    'hero.name': 'Sofia Cruz.',
-    'hero.bio': 'I turn complex problems into clear visual systems. Uncompromised brutalism — structure, function, aesthetics. Every pixel works.',
+    'hero.name': 'Bekzod Musabaev.',
+    'hero.bio': 'I turn ideas into clear visual systems. Branding, web design, 3D and motion — from the first brief to the final file. 4 years of experience. Worked with retail, startups, and agencies.',
     'hero.status': 'Status',
     'hero.statusValue': "Available '25",
     'hero.based': 'Based',
@@ -429,7 +431,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     'cta.success': "Received. I'll respond within 24 hours.",
 
     // Footer
-    'footer.copy': '© MMXXV Sofia Cruz',
+    'footer.copy': '© MMXXV Bekzod Musabaev',
 
     // Inner pages
     'page.about': 'About',
@@ -460,7 +462,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     'contact.subtitle': 'Fill in the blanks below — it only takes a minute.',
 
     // NLF (Natural Language Form)
-    'nlf.greeting': "Hi Bekzod, I'm",
+    'nlf.greeting': "Hi Bekzod! I'm",
     'nlf.needPartner': '. I need a solid design partner to help me with',
     'nlf.projectAbout': '. The project is about',
     'nlf.reachMe': '. You can reach me at',

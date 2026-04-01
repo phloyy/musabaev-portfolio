@@ -1,18 +1,19 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { projectsData } from '../data/projects';
 import { useLang } from '../i18n/LanguageContext';
+import { useProjects } from '../hooks/useProjects';
 
 export default function WorkIndex() {
   const { t } = useLang();
+  const { projects, loading } = useProjects();
   const [view, setView] = useState('grid');
   const [activeFilter, setActiveFilter] = useState('ALL');
 
   const filters = ['ALL', 'UX', 'WEB', 'BRAND', 'PRINT'];
 
   const filteredProjects = activeFilter === 'ALL'
-    ? projectsData
-    : projectsData.filter(p => p.category === activeFilter);
+    ? projects
+    : projects.filter(p => p.category === activeFilter);
 
   return (
     <div className="work-container">
@@ -73,46 +74,70 @@ export default function WorkIndex() {
 
       {view === 'grid' ? (
         <div className="grid-view">
-          {filteredProjects.map(project => (
+          {loading ? (
+             [1, 2, 3].map(i => (
+              <div key={i} className="project-card" style={{ opacity: 0.5, pointerEvents: 'none' }}>
+                <div style={{ width: '100%', aspectRatio: '4/3', background: 'rgba(255,255,255,0.05)' }} />
+                <div className="card-content">
+                  <div className="card-idx">0{i}</div>
+                  <div className="card-title" style={{ background: 'rgba(255,255,255,0.1)', color: 'transparent', borderRadius: '4px', width: '60%' }}>Loading...</div>
+                </div>
+              </div>
+            ))
+          ) : filteredProjects.map((project, idx) => {
+            const num = project.id || String(idx + 1).padStart(2, '0');
+            const type = project.type || project.description || project.category;
+            const imgUrl = project.image_url || project.img;
+            return (
             <Link
-              key={project.id}
+              key={project.id || project.slug}
               to={`/work/${project.slug}`}
               className="project-card"
               data-cursor-hover="true"
             >
               <img
-                src={project.img}
+                src={imgUrl}
                 alt={project.title}
                 className="card-image"
                 loading="lazy"
               />
               <div className="card-content">
-                <div className="card-idx">{project.id}</div>
+                <div className="card-idx">{num}</div>
                 <div className="card-title">{project.title}</div>
                 <div className="card-meta">
-                  <span>{project.type}</span>
+                  <span>{type}</span>
                   <span>{project.year}</span>
                 </div>
               </div>
             </Link>
-          ))}
+          )})}
         </div>
       ) : (
         <div className="list-view">
-          {filteredProjects.map(project => (
+          {loading ? (
+             [1, 2, 3].map(i => (
+              <div key={i} className="list-row" style={{ opacity: 0.5 }}>
+                 <div className="list-idx">0{i}</div>
+                 <div className="list-title" style={{ background: 'rgba(255,255,255,0.1)', color: 'transparent', borderRadius: '4px', width: '200px' }}>Loading...</div>
+              </div>
+             ))
+          ) : filteredProjects.map((project, idx) => {
+            const num = project.id || String(idx + 1).padStart(2, '0');
+            const type = project.type || project.description || project.category;
+            return (
             <Link
-              key={project.id}
+              key={project.id || project.slug}
               to={`/work/${project.slug}`}
               className="list-row"
               data-cursor-hover="true"
             >
-              <div className="list-idx">{project.id}</div>
+              <div className="list-idx">{num}</div>
               <div className="list-title">{project.title}</div>
-              <div className="list-type">{project.type}</div>
+              <div className="list-type">{type}</div>
               <div className="list-year">{project.year}</div>
               <div className="list-arrow">&rarr;</div>
             </Link>
-          ))}
+          )})}
         </div>
       )}
 
