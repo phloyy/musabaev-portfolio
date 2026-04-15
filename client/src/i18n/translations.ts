@@ -125,7 +125,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     'contact.location': 'Локация',
     'contact.social': 'Соцсети',
     'contact.availability': 'Доступность',
-    'contact.availabilityText': 'Доступна для фриланса и постоянного сотрудничества. Время ответа: 24-48 часов.',
+    'contact.availabilityText': 'Доступен для фриланса и постоянного сотрудничества. Время ответа: 24-48 часов.',
 
     // Contact page header (NLF)
     'contact.title': 'Поговорим.',

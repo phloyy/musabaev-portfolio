@@ -66,11 +66,27 @@ html {
   transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1), height 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease;
 }
 
+.cursor-trail {
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  border: 1px solid var(--clr-accent);
+  z-index: 9998;
+  mix-blend-mode: difference;
+}
+
 .cursor.hovering {
   width: 60px;
   height: 60px;
   background: var(--clr-light);
   mix-blend-mode: exclusion;
+}
+
+.cursor-trail.hovering {
+  width: 80px;
+  height: 80px;
+  border-color: var(--clr-light);
+  opacity: 0.4;
 }
 
 /* ==========================================================================
@@ -920,13 +936,16 @@ html {
   color: rgba(244, 244, 242, 0.8);
   padding: 0.4rem 0.75rem;
   border: 1px solid transparent;
-  transition: color 0.3s, background-color 0.3s, border-color 0.3s;
+  border-left: 2px solid transparent;
+  transition: color 0.3s, background-color 0.3s, border-color 0.3s, padding-left 0.25s;
 }
 
 .skill-item:hover {
   color: var(--clr-accent);
   background-color: rgba(235, 65, 35, 0.08);
   border-color: rgba(235, 65, 35, 0.2);
+  border-left-color: var(--clr-accent);
+  padding-left: 1rem;
 }
 
 .experience-timeline {
@@ -1294,6 +1313,32 @@ html {
       rgba(16, 16, 16, 0.85) 100%);
 }
 
+/* Subtle grid pattern — visible when no video, adds depth */
+.hero-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(244, 244, 242, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(244, 244, 242, 0.04) 1px, transparent 1px);
+  background-size: 80px 80px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Radial gradient spotlight — top-right corner accent glow */
+.hero-section::after {
+  content: '';
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 60%;
+  height: 80%;
+  background: radial-gradient(ellipse at center, rgba(235, 65, 35, 0.08) 0%, transparent 65%);
+  z-index: 1;
+  pointer-events: none;
+}
+
 .hero-inner {
   position: relative;
   z-index: 2;
@@ -1438,12 +1483,45 @@ html {
   padding: 2.5rem;
   border: 1px solid rgba(16, 16, 16, 0.12);
   transition: border-color 0.3s, transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-item > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Decorative large background number per card */
+.services-grid > div:nth-child(1) .service-item::after { content: '01'; }
+.services-grid > div:nth-child(2) .service-item::after { content: '02'; }
+.services-grid > div:nth-child(3) .service-item::after { content: '03'; }
+.services-grid > div:nth-child(4) .service-item::after { content: '04'; }
+
+.service-item::after {
+  position: absolute;
+  bottom: -1.5rem;
+  right: -0.25rem;
+  font-family: var(--font-display);
+  font-size: 8rem;
+  font-weight: 800;
+  line-height: 1;
+  color: rgba(16, 16, 16, 0.05);
+  letter-spacing: -0.08em;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  transition: color 0.3s ease;
 }
 
 .service-item:hover {
   border-color: var(--clr-accent);
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(16, 16, 16, 0.08);
+}
+
+.service-item:hover::after {
+  color: rgba(235, 65, 35, 0.07);
 }
 
 .service-idx {
@@ -1486,6 +1564,26 @@ html {
   margin-top: 2rem;
   padding-top: 2rem;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+}
+
+/* Horizontal connecting line through step numbers */
+.process-steps::before {
+  content: '';
+  position: absolute;
+  top: 3rem;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(235, 65, 35, 0.3) 20%,
+    rgba(235, 65, 35, 0.5) 50%,
+    rgba(235, 65, 35, 0.3) 80%,
+    transparent
+  );
+  pointer-events: none;
 }
 
 .process-step {
@@ -1557,7 +1655,28 @@ html {
 
 .pricing-card--featured {
   border-color: var(--clr-accent);
-  background-color: rgba(235, 65, 35, 0.06);
+  border-width: 2px;
+  background-color: rgba(235, 65, 35, 0.1);
+  position: relative;
+}
+
+.pricing-card--featured::before {
+  content: '★ BEST VALUE';
+  position: absolute;
+  top: -1px;
+  right: 1.5rem;
+  background-color: var(--clr-accent);
+  color: var(--clr-dark);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 0.2rem 0.6rem;
+  text-transform: uppercase;
+}
+
+.pricing-card--featured .pricing-range {
+  color: var(--clr-accent);
 }
 
 .pricing-tier {
